@@ -1,0 +1,30 @@
+.login-form{
+  width:40%;
+  margin: 0 auto;
+  text-align:center;
+  border: 1px solid #666;
+  box-shadow: 2px 2px 4px #777;
+  padding:2em;
+
+}
+.login-form h2{
+    
+    font-weight:600;
+    margin:0.5em;
+}
+.login-form label{
+    display:block;
+    width:100%;
+   
+
+}
+.login-form label span{
+  display:inline-block;
+  width:25%;
+  margin-top:1em;
+  text-align:left;
+}
+.login-form button{
+    margin-top:0.5em;
+
+}
