@@ -29,9 +29,9 @@ export default function AddListForm({userId}) {
 
     return (
         <form className={styles['add-list-form']} onSubmit ={handleSubmit}>
-        <div className="form-group row">
-          <label htmlFor="item" className="col-sm-3 col-form-label">Item:</label>
-           <div className="col-sm-9">
+        <div className="form-group d-flex justify-content-center">
+          <label htmlFor="item" className="col-form-label mr-2">Item:</label>
+           <div>
             <input 
             type="text"
             onChange = {(e)=>setItem(e.target.value.trim())} 

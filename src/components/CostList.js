@@ -1,57 +1,85 @@
+import { useFirestore } from '../hooks/useFirestore'
 //styles
 import styles from './CostList.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faColumns, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
+export default function CostList({ costLists }) {
+  const { deleteDocument, response } = useFirestore('costs')
+  const handleDelete = id => {
+    console.log('delete item called')
+    /* const ref = doc(db,'lists',id);
+        await deleteDoc(ref);*/
+    deleteDocument(id)
+  }
+  const costInTotal = costLists.reduce(
+    (total, costList) => (total += costList.amount),
+    0
+  )
+  console.log(costLists)
 
-export default function CostList({costLists}) {
+  const ownToArray = costLists.reduce((acc, costList) => {
+    if (costList.ownTo !== '') {
+      let person = costList.ownTo
 
-    const handleDelete =(id)=>{
-    console.log("delete item called");
+      if (acc.hasOwnProperty('person') && acc.person === costList.ownTo) {
+        acc.amount = costList.amount
+      } else {
+        acc.person = costList.ownTo
+        acc.amount = costList.amount
+      }
     }
-    const costInTotal = costLists.reduce((total,costList)=>
-       total+=costList.amount,0);
-       console.log(costLists);
-    
-    const ownToArray = costLists.reduce((acc,costList)=>{
-       
-       if(costList.ownTo !== ""){
-           let person = costList.ownTo;
-        
-          if(acc.hasOwnProperty(person)&& person === costList.ownTo){
-            acc[person] +=  costList.amount;
-          }else{
-            acc[person] = costList.amount;
-          }
-          
-       }
-     return acc;
-      
-    },[])
-    
-       
+    return acc
+  }, [])
 
-    console.log("ownToArry",ownToArray);
-    return (
-        <div className="p-1" >
-        
-        <ul className={styles['cost-list']}>
+  console.log('ownToArry', ownToArray)
+  return (
+    <div className="p-1">
+      <table className="table">
+        <thead>
+          <tr>
+            <th col="2">Item</th>
+            <th col="1">Splited</th>
+            <th col="2">Own To</th>
+            <th col="2">Amount</th>
+            <th col="1">Delete</th>
+          </tr>
+        </thead>
 
-           {costLists.map(list=>(
-               <li key={list.id} className="list-group-item">
-               <p className="item">{list.item}</p>
-               <p className="splited">{list.splited ? "splited":"Not Splited"}</p>
-               <p className="oweto"> Own to{list.ownTo}</p>
-               <p className="amount">AU$:{list.amount}</p>
-               <button className={styles.cross} onClick={()=>handleDelete(list.id)}>X</button>
-               </li>
-           ))}
-           
-       </ul>
-       <p>Cost in total(AU$):{costInTotal}</p>
-       {ownToArray && ownToArray.map((key,val)=>(
-           <p>{key}:{val}</p>
-       ))}
-     
+        <tbody className={styles['cost-list']}>
+          {costLists.map(list => (
+            <tr key={list.id}>
+              <td col="2" className={styles.item}>
+                {list.item}
+              </td>
+              <td col="1" className={styles['is-splited']}>
+                <FontAwesomeIcon
+                  icon={faColumns}
+                  color={list.isSplited ? '#1f9751' : ''}
+                />
+              </td>
+              <td col="2" className="own to">
+                {list.ownTo}
+              </td>
+              <td col="2" className="amount">
+                AU$:{list.amount.toFixed(2)}
+              </td>
+              <td col="1" className={styles.delete}>
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  onClick={() => handleDelete(list.id)}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className={styles.summary}>
+        <p>Cost in total</p>
+        <p>AU$:{costInTotal.toFixed(2)}</p>
+      </div>
 
+      {ownToArray && <p>{typeof ownToArray}</p>}
     </div>
-    )
+  )
 }

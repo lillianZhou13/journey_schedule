@@ -1,29 +1,53 @@
 .cost-list {
-    width:100%; 
- }
- .cost-list li{
-   text-align:left;
-   display: grid;
-   border:1px solid #f2f2f2;
-   box-shadow:2px 3px 3px rgba(50,50,50,0.1);
-   grid-template-columns: 2fr 2fr 2fr 1fr;
-   padding: 10px;
-   border-left:4px solid #1f9751;
-   margin:2em auto;
-   overflow:hidden;
-   position:relative
- }
- .cost-list button.cross{
-     position:absolute;
-     top:0;
-     right:0;
-     color:#777;
-     background:#ddd;
-     border:none;
-     padding:12px 8px;
-     text-align:center;
-     line-height:0;
-     font-size:0.9em;
-     cursor:pointer;
- 
- }
+  width: 100%;
+}
+tbody.cost-list tr {
+  text-align: center;
+  border: 1px solid #f2f2f2;
+  box-shadow: 2px 3px 3px rgba(50, 50, 50, 0.1);
+  padding: 10px;
+  border-left: 4px solid #1f9751;
+  margin: 2em auto;
+  overflow: hidden;
+  position: relative;
+}
+tbody.cost-list .item {
+  text-align: left;
+}
+.cost-list button.cross {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #777;
+  background: #ddd;
+  border: none;
+  padding: 12px 8px;
+  text-align: center;
+  line-height: 0;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.summary {
+  display: flex;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-bottom: 0;
+  padding-top: 2em;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid #1f9751;
+  font-weight: bold;
+}
+.summary p {
+  margin-bottom: 0.1em;
+}
+
+.cost-list .is-splited,
+.delete {
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+.cost-list .is-splited:hover,
+.cost-list .delete:hover {
+  color: #1f9751;
+}

@@ -1,17 +1,21 @@
 .shopping-list {
    width:100%; 
 }
-.shopping-list li{
-  text-align:left;
-  display: grid;
+.table{
+  border-spacing: 1em 0;
+}
+tbody.shopping-list tr{
+  text-align:center;
   border:1px solid #f2f2f2;
   box-shadow:2px 3px 3px rgba(50,50,50,0.1);
-  grid-template-columns: 2fr 2fr 1fr 2fr;
-  padding: 10px;
-  border-left:4px solid #1f9751;
+   padding: 10px;
+  border-left:5px solid #1f9751;
   margin:2em auto;
   overflow:hidden;
   position:relative
+}
+tbody.shopping-list tr .item{
+  text-align:left;
 }
 .shopping-list button.cross{
     position:absolute;
@@ -27,3 +31,21 @@
     cursor:pointer;
 
 }
+.shopping-list .edit,
+.shareable,.ready,.delete
+{
+  margin-left:0.5em;
+  cursor:pointer;
+}
+.shopping-list .edit:hover,
+.shopping-list .shareable:hover,
+.shopping-list .ready:hover,
+.shopping-list .delete:hover
+{
+  color:#1f9751;
+}
+
+
+
+
+
